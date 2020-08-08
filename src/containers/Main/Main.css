@@ -1,0 +1,15 @@
+button {
+    width: 200px;
+    margin: 10px;
+    background-color: lightskyblue;
+    height: 50px;
+    box-shadow: 10px 5px 5px gainsboro;
+    cursor: pointer;
+    border-radius: 100px;
+  }
+
+
+  .Main-Controls {
+      margin: 2px auto 2px auto;
+      width: 60%;
+  }

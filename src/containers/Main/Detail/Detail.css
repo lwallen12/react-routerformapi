@@ -1,0 +1,12 @@
+.Detail {
+    width: 80%;
+    margin: 10px auto 3px auto;
+    border: 1px solid black;
+    box-shadow: 10px 5px 5px gainsboro;
+    padding: 4px;
+}
+
+small {
+    margin: 0 0 0 0;
+    text-align: left;
+}
