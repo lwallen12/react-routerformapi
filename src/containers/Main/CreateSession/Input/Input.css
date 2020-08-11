@@ -26,3 +26,8 @@
 textarea {
     height: 200px;
 }
+
+.Invalid {
+    border: 3px solid red;
+    background-color: rgb(233, 184, 184);
+}

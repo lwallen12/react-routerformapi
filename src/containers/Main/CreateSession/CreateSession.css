@@ -4,3 +4,7 @@ form {
     height: 500px;
     margin: auto auto 100px auto;
 }
+
+button.disabled {
+    color: #ccc;
+}

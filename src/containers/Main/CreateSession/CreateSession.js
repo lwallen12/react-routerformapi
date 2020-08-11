@@ -18,7 +18,8 @@ class CreateSession extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             body: {
                 elementType: 'textarea',
@@ -31,7 +32,8 @@ class CreateSession extends Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             id: {
                 elementType: 'input',
@@ -40,7 +42,10 @@ class CreateSession extends Component {
                     placeholder: 'Id'
                 },
                 value: '',
-                label: 'Id'
+                label: 'Id',
+                validation: {},
+                valid: true,
+                touched: false
             },
             userId: {
                 elementType: 'input',
@@ -54,9 +59,11 @@ class CreateSession extends Component {
                     required: true,
                     maxlength: 3
                 },
-                valid: false
-            }
-        }
+                valid: false,
+                touched: false
+            },
+        }, 
+        formIsValid: false
     }
 
     submitHandler = ( event ) => {
@@ -105,9 +112,17 @@ class CreateSession extends Component {
         };
         updatedFormElement.value = event.target.value;
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
+        updatedFormElement.touched = true;
         updatedForm[inputIdentifier] = updatedFormElement;
         console.log(updatedFormElement);
-        this.setState({createSessionForm: updatedForm})
+
+        let formIsValid = true;
+        for (let inputIdent in updatedForm) {
+            formIsValid = updatedForm[inputIdent].valid && formIsValid;
+            //couldn't you set it to the value, and if it is false then break?
+        }
+
+        this.setState({createSessionForm: updatedForm, formIsValid: formIsValid})
     }
 
     render() {
@@ -127,12 +142,14 @@ class CreateSession extends Component {
                            value={formElement.config.value}
                            label={formElement.config.label}
                            elementType={formElement.config.elementType}
-                           changed={(event) => this.inputChangeHandler(event, formElement.id)} />
+                           changed={(event) => this.inputChangeHandler(event, formElement.id)}
+                           invalid={formElement.config.valid}
+                           touched={formElement.config.touched} />
                     // <p key={formElement.id}>
                     // {formElement.config.elementType} + {formElement.config.elementConfig.placeholder}
                     // </p>
                 ))}
-              <button type="submit" style={{backgroundColor: ['lightgreen']}}>SUBMIT</button>
+              <button type="submit" disabled={!this.state.formIsValid} style={{backgroundColor: ['lightgreen']}}>SUBMIT</button>
             </form>
         )
 
